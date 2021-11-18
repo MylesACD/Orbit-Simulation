@@ -56,9 +56,10 @@ def construct_points(bodies):
 def anim_orbit(bodies,dur,dt):
     list_of_positions = orbit_sim(bodies,dur,dt)
     
-    for
+    for positions in list_of_positions:
+        plt.plot(positions[0],positions[1],"o")
+        
     
-    
-    plt.plot( ,"o")
+   
      
 
