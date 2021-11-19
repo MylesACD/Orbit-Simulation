@@ -1,41 +1,45 @@
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 import numpy as np
-import body
+import body as b
 
 
 #---------------------
-dur=2
-dt = 0.1
+dur=1000
+#seconds in a day
+dt = 60*60*24
 
 
 
 #---------------------
-EARTH = 5.97219e+24 
-SUN = 1.989e+30
+EARTH =b.body( 5.97219e+24,0,148e9,3e4,0 )
+SUN = b.body(1.989e+30,0,0,0,0)
+JUPITER = b.body(1898.19e24,778.57e9,0,0,13.06e3)
 
-
-#return a 3d array should be shape dur//dt,2,len(bodies)
+#return a 3d array should be shape dur,2,len(bodies)
 def orbit_sim(bodies,dur,dt):
     positions = []
     positions.append(construct_points(bodies))
-    for i in range(int(dur/dt)):
+    
+    for i in range(dur):
+        #print_bodies(bodies)
         bodies = accl_all(bodies,dt)
         bodies = move_all(bodies,dt)
         positions.append(construct_points(bodies)) 
-    return np.asarray(positions)
+    return positions
 
 def accl_all(bodies,dt):
     new_bodies = []
     for body in bodies:
         
-        new_bodies.append(body.calc_velo(bodies,dt))
+        new_bodies.append(b.calc_velo(body,bodies,dt))
         
     return new_bodies
 
 def move_all(bodies,dt):
     new_bodies =[]
     for body in bodies:
-       new_bodies.append(body.move(dt))
+       new_bodies.append(b.move(body,dt))
     return new_bodies
         
 #returns a 2d array should be shape 2,len(bodies)
@@ -54,17 +58,40 @@ def construct_points(bodies):
     
     
 def anim_orbit(bodies,dur,dt):
-    list_of_positions = orbit_sim(bodies,dur,dt)
+    list_of_positions =np.asarray(orbit_sim(bodies,dur,dt))
+ 
+    fig, ax = plt.subplots()
+    plt.get_current_fig_manager().window.showMaximized() 
+    xmin = np.min(list_of_positions[:,0,:])
+    ymin= np.min(list_of_positions[:,1,:])
+    xmax= np.max(list_of_positions[:,0,:])
+    ymax= np.max(list_of_positions[:,1,:])
     
-    for positions in list_of_positions:
-        plt.plot(positions[0],positions[1],"o")
+    ax.axis("off")
+    for space in list_of_positions:
+       # print(space)
+        plt.clf()
+        plt.xlim([xmin,xmax])
+        plt.ylim([ymin,ymax])
+        plt.plot(space[0],space[1],"o")
+        plt.draw()
+        #plt.pause(0.001)
+       
+            
+        
+    
+ 
+   
+    
+
         
         
-b1 = body.body(EARTH,0,148e+9,-3.0e+4,0)
-b2 = body.body(SUN,0,0,0,0)        
-testing = [b1,b2]
+
+    
+testing = [EARTH,SUN,JUPITER]
 
 anim_orbit(testing,dur,dt)
+#orbit_sim(testing, dur, dt)
         
         
     

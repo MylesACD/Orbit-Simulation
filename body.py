@@ -1,7 +1,9 @@
 import numpy as np
 import copy
-G = 6.67408e-11
 
+G = 6.67408e-11
+EARTH = 5.97219e+24 
+SUN = 1.989e+30
 
 class body(object):
     
@@ -12,35 +14,46 @@ class body(object):
         self.y_velo = y_velo
         self.x_velo = x_velo
         
-    def calc_velo(self,bodies,dt):
-        this= copy.copy(self)
-        for other in bodies:
-            if this.x!=other.x or this.y!=other.y:
-                r2 = calc_square_distance(this,other)
-                #magnitude of the accleration 
-                accl = G * other.mass /r2
-                theta = np.arctan2([this.y,other.y],[this.x,other.x])[0]
-                #theta *= (180.0/np.pi)
-                x_component = np.cos(theta)*accl
-                y_component = np.sin(theta)*accl
-                this.x_velo+=x_component *dt
-                this.y_velo+=y_component *dt
-            else:
-                #TODO collision
-                pass
+
             
-            return this
-            
-    def move(self,dt):
-        this=copy.copy(self)
-        this.x += self.x_velo *dt
-        this.y += self.y_velo *dt
-        return this
+   
     def __str__(self):
         return str(self.mass)
         
-
+    
 
 def calc_square_distance(b1,b2):
     return ((b1.x - b2.x)**2 + (b1.y-b2.y)**2)
 
+def print_bodies(bodies):
+    for body in bodies:
+        print(body)
+        
+def calc_velo(body,bodies,dt):
+    body = copy.copy(body)
+    for other in bodies:
+        if body.x!=other.x or body.y!=other.y:
+            r2 = calc_square_distance(body,other)
+            #magnitude of the accleration 
+            accl = G * other.mass /r2 * dt
+            
+            dx =other.x - body.x
+            dy = other.y - body.y
+            d = r2**0.5
+            
+         
+            x_component = dx/d*accl
+            y_component = dy/d*accl
+            body.x_velo+=x_component
+            body.y_velo+=y_component
+        else:
+               #TODO collision
+               pass
+            
+    return body
+    
+def move(body,dt):
+        body = copy.copy(body)
+        body.x += body.x_velo *dt
+        body.y += body.y_velo *dt
+        return body
