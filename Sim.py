@@ -69,9 +69,10 @@ def anim_orbit(bodies,dur,dt):
     #plt.get_current_fig_manager().window.showMaximized() 
     fig, ax = plt.subplots()
     fig.canvas.draw()
-   
+    ax.plot([],[],"o")
     
     #-----------------------
+    """
     for space in list_of_positions:
        # print(space)
         ax.clear()
@@ -80,8 +81,18 @@ def anim_orbit(bodies,dur,dt):
         ax.axis("off")
         ax.draw(fig.canvas.renderer)
         plt.pause(0.001)
-        
-  
+    """
+    # skip frames
+    i=0
+    while i < list_of_positions.shape[0]:
+        space = list_of_positions[i]
+        ax.clear()
+        ax.set(xlim=([xmin*1.1,xmax*1.1]),ylim=[ymin*1.1,ymax*1.1])
+        ax.plot(space[0],space[1],"o")
+        ax.axis("off")
+        ax.draw(fig.canvas.renderer)
+        plt.pause(0.001) 
+        i+=20
 
        
             
