@@ -4,8 +4,8 @@ import body
 
 
 #---------------------
-dur=300
-dt = 1
+dur=2
+dt = 0.1
 
 
 
@@ -18,17 +18,17 @@ SUN = 1.989e+30
 def orbit_sim(bodies,dur,dt):
     positions = []
     positions.append(construct_points(bodies))
-    for i in range(dur//dt):
-       bodies = accl_all(bodies,dt)
-       bodies = move_all(bodies,dt)
-       positions.append(construct_points(bodies)) 
+    for i in range(int(dur/dt)):
+        bodies = accl_all(bodies,dt)
+        bodies = move_all(bodies,dt)
+        positions.append(construct_points(bodies)) 
     return np.asarray(positions)
 
 def accl_all(bodies,dt):
     new_bodies = []
     for body in bodies:
-        new_bodies.append(body.calc_velo(bodies,dt))
         
+        new_bodies.append(body.calc_velo(bodies,dt))
         
     return new_bodies
 
@@ -58,6 +58,14 @@ def anim_orbit(bodies,dur,dt):
     
     for positions in list_of_positions:
         plt.plot(positions[0],positions[1],"o")
+        
+        
+b1 = body.body(EARTH,0,148e+9,-3.0e+4,0)
+b2 = body.body(SUN,0,0,0,0)        
+testing = [b1,b2]
+
+anim_orbit(testing,dur,dt)
+        
         
     
    

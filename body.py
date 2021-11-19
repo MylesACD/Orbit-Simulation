@@ -1,10 +1,11 @@
 import numpy as np
+import copy
 G = 6.67408e-11
 
 
 class body(object):
     
-    def __init__(self,mass,y,x,y_velo,x_velo):
+    def __init__(self,mass,x,y,x_velo,y_velo):
         self.mass = mass
         self.y = y
         self.x = x
@@ -12,24 +13,31 @@ class body(object):
         self.x_velo = x_velo
         
     def calc_velo(self,bodies,dt):
-        
+        this= copy.copy(self)
         for other in bodies:
-            r2 = calc_square_distance(self,other)
-            #magnitude of the accleration 
-            accl = G * other.mass /r2
-            theta = np.arctan2([self.y,other.y],[self.x,other.x])[0]
-            #theta *= (180.0/np.pi)
-            x_component = np.cos(theta)*accl
-            y_component = np.sin(theta)*accl
-            self.x_velo+=x_component *dt
-            self.y_velo+=y_component *dt
+            if this.x!=other.x or this.y!=other.y:
+                r2 = calc_square_distance(this,other)
+                #magnitude of the accleration 
+                accl = G * other.mass /r2
+                theta = np.arctan2([this.y,other.y],[this.x,other.x])[0]
+                #theta *= (180.0/np.pi)
+                x_component = np.cos(theta)*accl
+                y_component = np.sin(theta)*accl
+                this.x_velo+=x_component *dt
+                this.y_velo+=y_component *dt
+            else:
+                #TODO collision
+                pass
             
-            return self
+            return this
             
     def move(self,dt):
-        self.x += self.x_velo *dt
-        self.y += self.y_velo *dt
-        return self
+        this=copy.copy(self)
+        this.x += self.x_velo *dt
+        this.y += self.y_velo *dt
+        return this
+    def __str__(self):
+        return str(self.mass)
         
 
 
