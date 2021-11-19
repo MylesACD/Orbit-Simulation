@@ -5,7 +5,7 @@ import body as b
 
 
 #---------------------
-dur=1000
+dur=4380
 #seconds in a day
 dt = 60*60*24
 
@@ -59,23 +59,30 @@ def construct_points(bodies):
     
 def anim_orbit(bodies,dur,dt):
     list_of_positions =np.asarray(orbit_sim(bodies,dur,dt))
- 
-    fig, ax = plt.subplots()
-    plt.get_current_fig_manager().window.showMaximized() 
     xmin = np.min(list_of_positions[:,0,:])
     ymin= np.min(list_of_positions[:,1,:])
     xmax= np.max(list_of_positions[:,0,:])
     ymax= np.max(list_of_positions[:,1,:])
     
-    ax.axis("off")
+    
+    #------a bunch of stuff to try speeding up the render
+    #plt.get_current_fig_manager().window.showMaximized() 
+    fig, ax = plt.subplots()
+    fig.canvas.draw()
+   
+    
+    #-----------------------
     for space in list_of_positions:
        # print(space)
-        plt.clf()
-        plt.xlim([xmin,xmax])
-        plt.ylim([ymin,ymax])
-        plt.plot(space[0],space[1],"o")
-        plt.draw()
-        #plt.pause(0.001)
+        ax.clear()
+        ax.set(xlim=([xmin*1.1,xmax*1.1]),ylim=[ymin*1.1,ymax*1.1])
+        ax.plot(space[0],space[1],"o")
+        ax.axis("off")
+        ax.draw(fig.canvas.renderer)
+        plt.pause(0.001)
+        
+  
+
        
             
         
