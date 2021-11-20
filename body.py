@@ -4,7 +4,7 @@ import copy
 G = 6.67408e-11
 EARTH = 5.97219e+24 
 SUN = 1.989e+30
-
+DISTANCE_TOL = 1e2
 class body(object):
     
     def __init__(self,mass,x,y,x_velo,y_velo):
@@ -30,9 +30,20 @@ def print_bodies(bodies):
         print(body)
         
 def calc_velo(body,bodies,dt):
-    body = copy.copy(body)
+    #bodies.remove(body)
+
     for other in bodies:
-        if body.x!=other.x or body.y!=other.y:
+        if other.x - DISTANCE_TOL <= body.x<=other.x + DISTANCE_TOL and other.y - DISTANCE_TOL <=body.y<=other.y-DISTANCE_TOL and body.mass <other.mass:
+            
+                    return None
+             
+        
+        
+        # do not process the relationship between a body and its self
+        if body != other:
+            #do a collision if
+            #
+            
             r2 = calc_square_distance(body,other)
             #magnitude of the accleration 
             accl = G * other.mass /r2 * dt
@@ -46,9 +57,8 @@ def calc_velo(body,bodies,dt):
             y_component = dy/d*accl
             body.x_velo+=x_component
             body.y_velo+=y_component
-        else:
-               #TODO collision
-               pass
+      
+        
             
     return body
     
