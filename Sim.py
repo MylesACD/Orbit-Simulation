@@ -90,7 +90,7 @@ def anim_orbit(bodies,dur,dt):
     while i < list_of_positions.shape[0]:
         space = list_of_positions[i]
         ax.clear()
-       # ax.set(xlim=([xmin*1.1,xmax*1.1]),ylim=[ymin*1.1,ymax*1.1])
+        ax.set(xlim=([xmin*1.1,xmax*1.1]),ylim=[ymin*1.1,ymax*1.1])
         ax.scatter(space[0],space[1],s=dots)
         ax.set_yscale("linear")
         ax.set_xscale("linear")
@@ -107,8 +107,9 @@ def adjust_dot_sizes(masses):
     mexp = [str(mass).split("e+")[1] for mass in masses]
     mexp =np.asarray([int(num) for num in mexp])
     mexp = mexp/min(mexp)
-   
+    mexp = mexp**4
     mexp = [20*2**num for num in mexp]
+    print(mexp)
     return mexp
 
     
