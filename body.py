@@ -4,7 +4,7 @@ import copy
 G = 6.67408e-11
 EARTH = 5.97219e+24 
 SUN = 1.989e+30
-DISTANCE_TOL = 1e2
+DISTANCE_TOL = 1e9
 class body(object):
     
     def __init__(self,mass,x,y,x_velo,y_velo):
@@ -33,16 +33,18 @@ def calc_velo(body,bodies,dt):
     #bodies.remove(body)
 
     for other in bodies:
-        """
-        if other.x - DISTANCE_TOL <= body.x<=other.x + DISTANCE_TOL and other.y - DISTANCE_TOL <=body.y<=other.y-DISTANCE_TOL and body.mass <other.mass:
-            
-            return None
-        """     
         
+      
         
         # do not process the relationship between a body and its self
         if body != other:            
             r2 = calc_square_distance(body,other)
+            
+            if (r2**0.5) < DISTANCE_TOL:
+
+                print(body.mass," collided with: ", other.mass)
+           
+        
             
             if r2!=0:
             
@@ -56,6 +58,7 @@ def calc_velo(body,bodies,dt):
          
                 x_component = dx/d*accl
                 y_component = dy/d*accl
+                
                 body.x_velo+=x_component
                 body.y_velo+=y_component
       
