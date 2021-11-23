@@ -6,7 +6,7 @@ import body as b
 
 #---------------------
 
-years = 1
+years = 0.8
 days = years *365
 
 # duration is a length of years split into hours
@@ -18,7 +18,7 @@ dt = 60 *60
 frame_time = 0.001
 
 #---------------------
-EARTH =   b.body(5.97219e+24, 0,         148e9,      3e4,        0 )
+EARTH =   b.body(5.97219e+24, 0,         148e9,      3e4,        0)
 SUN =     b.body(1.989e+30,   0,         0,          0,          0)
 JUPITER = b.body(1898.13e24,  0,        -778.57e9,  -13.06e3,    0)
 MARS = b.body(0.64171e24,     161.166e9, 161.166e9,  17.02e3,    -17.02e3)
@@ -26,7 +26,7 @@ VENUS = b.body(4.8675e24,    -108.209e9, 0,          0,          35.02e3)
 MERCURY = b.body(0.33011e24,  57.909e9,  0,          0,          47.36e3)
 NEPTUNE = b.body(86.813e24,  -3178.49e9, 3178.49e9,  3.839e3,    3.839e3)
 SATURN = b.body(568.34e24,    1013.66e9, -1013.66e9,-6.845e3,   -6.845e3)
-URANUS = b.body(86.8e24,0,0,0,0)
+URANUS = b.body(86.8e24,      2872.46e9,  0,         0,          6.8e3)
 
 XTE_J =   b.body(5.967e30,   -400e9,    -400e9,     1e3,  1e3)
 
@@ -35,7 +35,7 @@ def orbit_sim(bodies,dur,dt):
     positions = []
     positions.append(construct_points(bodies))
     
-    for i in range(dur):
+    for i in range(int(dur)):
         #print_bodies(bodies)
         bodies = accl_all(bodies,dt)
         bodies = move_all(bodies,dt)
@@ -125,15 +125,28 @@ def anim_orbit(bodies,dur,dt):
         
     
 def adjust_dot_sizes(masses):
-    mexp = [str(mass).split("e+")[1] for mass in masses]
+    #standarize the masses into scientific notation
+    masses = ["{:.2e}".format(mass) for mass in masses]
+    # extract the mass coe
+    mcoe = [mass.split("e+")[0] for mass in masses]
+    # the main size of the dot is based on the exponent of its mass
+    mexp = [mass.split("e+")[1] for mass in masses]
+    # convert strings to ints
     mexp =np.asarray([int(num) for num in mexp])
+    mcoe = np.asarray([float(num) for num in mcoe])
+    # get the ratio between the exponent and the smallest body exponent
     mexp = mexp/min(mexp)
+    # put to the power of 5 to make it really matter
     mexp = mexp**5
-    mexp = [20*2**num for num in mexp]
-    return mexp
+    # mcoe is not as import as mexp, so reduce its power
+    mcoe = mcoe**0.33
+    # combine mcoe and mexp to form the sizes of the dots
+    sizes = [20*2**num for num in mexp] * mcoe
+    
+    return sizes
   
 
-full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
+full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE, XTE_J]
 test3 = [SUN,EARTH,MARS,JUPITER,MERCURY,VENUS]
 test2 = [SUN,EARTH,JUPITER]
 test1 = [EARTH,XTE_J]
