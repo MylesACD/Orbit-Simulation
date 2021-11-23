@@ -4,6 +4,8 @@ import copy
 G = 6.67408e-11
 EARTH = 5.97219e+24 
 SUN = 1.989e+30
+
+# 1 million km
 DISTANCE_TOL = 1e9
 class body(object):
     

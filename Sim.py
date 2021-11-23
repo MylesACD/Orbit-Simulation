@@ -145,11 +145,16 @@ def adjust_dot_sizes(masses):
     # get the ratio between the exponent and the smallest body exponent
     mexp = mexp/min(mexp)
     # put to the power of 5 to make it really matter
-    mexp = mexp**5
+    mexp = mexp**6
     # mcoe is not as import as mexp, so reduce its power
-    mcoe = mcoe**0.33
+    mcoe = (mcoe)
     # combine mcoe and mexp to form the sizes of the dots
-    sizes = [15*2**num for num in mexp] * mcoe
+    sizes = [20*2**num for num in mexp] * mcoe
+    
+    print(masses)
+    print()
+    print(sizes)
+    
     
     return sizes
   
@@ -159,7 +164,7 @@ test3 = [SUN,EARTH,MARS,JUPITER,MERCURY,VENUS]
 test2 = [SUN,EARTH,JUPITER]
 test1 = [EARTH,XTE_J]
 #anim_orbit(test3, dur, dt)
-anim_orbit(full_local,dur,dt, "normal")
+anim_orbit(full_local,dur,dt, "efast")
 #anim_orbit(test2,dur,dt)
 #orbit_sim(testing, dur, dt)
         
