@@ -1,5 +1,5 @@
 import numpy as np
-import copy
+
 
 G = 6.67408e-11
 EARTH = 5.97219e+24 
@@ -32,11 +32,8 @@ def print_bodies(bodies):
         print(body)
         
 def calc_velo(body,bodies,dt):
-    #bodies.remove(body)
 
     for other in bodies:
-        
-      
         
         # do not process the relationship between a body and its self
         if body != other:            
@@ -69,7 +66,6 @@ def calc_velo(body,bodies,dt):
     return body
     
 def move(body,dt):
-        body = copy.copy(body)
         body.x += body.x_velo *dt
         body.y += body.y_velo *dt
         return body

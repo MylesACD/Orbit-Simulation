@@ -6,7 +6,7 @@ import body as b
 
 #---------------------
 
-years = 1
+years = 5
 days = years *365
 
 # duration is a length of years split into hours
@@ -145,26 +145,24 @@ def adjust_dot_sizes(masses):
     # get the ratio between the exponent and the smallest body exponent
     mexp = mexp/min(mexp)
     # put to the power of 5 to make it really matter
-    mexp = mexp**6
+    mexp = mexp**5
     # mcoe is not as import as mexp, so reduce its power
-    mcoe = (mcoe)
+    mcoe = (mcoe)**0.5
     # combine mcoe and mexp to form the sizes of the dots
     sizes = [20*2**num for num in mexp] * mcoe
     
-    print(masses)
-    print()
-    print(sizes)
     
     
     return sizes
   
 
-full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
+full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
+local_plus = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
 test3 = [SUN,EARTH,MARS,JUPITER,MERCURY,VENUS]
 test2 = [SUN,EARTH,JUPITER]
 test1 = [EARTH,XTE_J]
 #anim_orbit(test3, dur, dt)
-anim_orbit(full_local,dur,dt, "efast")
+anim_orbit(full_local,dur,dt, "fast")
 #anim_orbit(test2,dur,dt)
 #orbit_sim(testing, dur, dt)
         
