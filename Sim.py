@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 import body as b
-
+import timing as t
 
 #---------------------
 
@@ -77,7 +77,7 @@ def construct_points(bodies):
     
 def anim_orbit(bodies,dur,dt, speed):
     
-    list_of_positions, end_bodies =orbit_sim(bodies,dur,dt)
+    list_of_positions, end_bodies = t.runtime(orbit_sim(bodies,dur,dt))
     list_of_positions = np.asarray(list_of_positions)
     
     magic=  220
@@ -110,8 +110,6 @@ def anim_orbit(bodies,dur,dt, speed):
     plt.pause(frame_time) 
     masses = [body.mass for body in bodies]
     dots = adjust_dot_sizes(masses)
-    #fig.set_size_inches(figsize=(5,5))
-    plt.get_current_fig_manager().window.showMaximized() 
     
     
     #-----------------------
@@ -129,6 +127,7 @@ def anim_orbit(bodies,dur,dt, speed):
         ax.axis("off")
         ax.draw(fig.canvas.renderer)
         plt.pause(frame_time) 
+        plt.get_current_fig_manager().window.showMaximized() 
         i+=plot_interval    
         
     
@@ -162,11 +161,10 @@ test3 = [SUN,EARTH,MARS,JUPITER,MERCURY,VENUS]
 test2 = [SUN,EARTH,JUPITER]
 test1 = [EARTH,XTE_J]
 #anim_orbit(test3, dur, dt)
-anim_orbit(full_local,dur,dt, "fast")
+#anim_orbit(full_local,dur,dt, "fast")
 #anim_orbit(test2,dur,dt)
 #orbit_sim(testing, dur, dt)
-        
-        
+anim_orbit(full_local,dur,dt, "fast")
     
    
      
