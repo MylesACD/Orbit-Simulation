@@ -39,10 +39,13 @@ def calc_velo(body,bodies,dt):
         if body != other:            
             r2 = calc_square_distance(body,other)
             
+            #TODO revisse collision logic for radius
+            # zero the body
+            #calculate momentum shift
             if (r2**0.5) < DISTANCE_TOL:
 
                 print(body.mass," collided with: ", other.mass)
-           
+            return body
         
             
             if r2!=0:
