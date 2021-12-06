@@ -14,7 +14,7 @@ speed_for_sim.set("normal")
 
 #This is to hold the type of time step
 time_step = tk.IntVar()
-time_step.set(2)
+time_step.set(60 * 60)
 
 #---------------------
 SUN =     b.body(1.989e+30,   0,         0,          0,          0)
