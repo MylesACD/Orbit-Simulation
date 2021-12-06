@@ -157,13 +157,7 @@ def adjust_dot_sizes(masses):
 
 full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
 local_plus = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
-test3 = [SUN,EARTH,MARS,JUPITER,MERCURY,VENUS]
-test2 = [SUN,EARTH,JUPITER]
-test1 = [EARTH,XTE_J]
-#anim_orbit(test3, dur, dt)
-#anim_orbit(full_local,dur,dt, "fast")
-#anim_orbit(test2,dur,dt)
-#orbit_sim(testing, dur, dt)
+
 anim_orbit(full_local,dur,dt, "fast")
     
    
