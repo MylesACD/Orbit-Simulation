@@ -45,7 +45,7 @@ def calc_velo(body,bodies,dt):
             if (r2**0.5) < DISTANCE_TOL:
 
                 print(body.mass," collided with: ", other.mass)
-            return body
+                return body
         
             
             if r2!=0:

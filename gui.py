@@ -12,6 +12,10 @@ list_of_all_bodies = []
 speed_for_sim = tk.StringVar()
 speed_for_sim.set("normal")
 
+#This is to hold the type of time step
+time_step = tk.IntVar()
+time_step.set(2)
+
 #---------------------
 SUN =     b.body(1.989e+30,   0,         0,          0,          0)
 MERCURY = b.body(0.33011e24,  57.909e9,  0,          0,          47.36e3)
@@ -94,7 +98,7 @@ def display_list():
 def run_sim():
     display_list()
     if len(list_of_all_bodies) != 0:
-        Sim.anim_orbit(list_of_all_bodies, dur, dt, speed_for_sim.get())
+        Sim.anim_orbit(list_of_all_bodies, dur, time_step.get(), speed_for_sim.get())
     else:
         error_label.config(text = "Must add bodies before running simulation")
 
@@ -145,9 +149,9 @@ speed_of_sim_label.grid(row=5, column=0)
 
 #This allows the user to select the time step of the simulation
 time_step_label = tk.Label(root, text = "Please select the time step")
-tk.Radiobutton(root, text = "Minute", variable = speed_for_sim, value = 1).grid(row=8, column=0)
-tk.Radiobutton(root, text = "Hour", variable = speed_for_sim, value = 2).grid(row=8, column=1)
-tk.Radiobutton(root, text = "Day", variable = speed_for_sim, value = 3).grid(row=8, column=2)
+tk.Radiobutton(root, text = "Minute", variable = time_step, value = 60).grid(row=8, column=0)
+tk.Radiobutton(root, text = "Hour", variable = time_step, value = 60 * 60).grid(row=8, column=1)
+tk.Radiobutton(root, text = "Day", variable = time_step, value = 60 * 60 *24).grid(row=8, column=2)
 time_step_label.grid(row=7, column=0)
 
 #Add preset buttons right here
