@@ -7,6 +7,9 @@ root.title("Orbit Simulation")
 #This is a temp holding places for the bodies that are created from the slider
 list_of_all_bodies = []
 
+#This is to hold the type of speed the sim will go by
+speed_for_sim = StringVar()
+speed_for_sim.set("normal")
 
 #This function is used for testing that the silders values are being taken in correctly
 def show_body_values():
@@ -32,40 +35,59 @@ the value of the slider be multiplied a certain number.
 
 #This is the set the mass of the body using a slider
 size_of_body_label = Label(root, text="Mass of the body")
-size_of_body = Scale(root, from_=2, to=10, orient=HORIZONTAL)
+size_of_body = Entry(root, width = 20)
 size_of_body_label.grid(row=0, column=0)
 size_of_body.grid(row=0, column=1)
 
 #This is the set the starting x of the body using a slider
 starting_x_body_label = Label(root, text="Starting X slider")
-starting_x_body = Scale(root, from_=2, to=10, orient=HORIZONTAL)
+starting_x_body = Entry(root, width = 20)
 starting_x_body_label.grid(row=1, column=0)
 starting_x_body.grid(row=1, column=1)
 
 #This is the set the starting y of the body using a slider
 starting_y_body_label = Label(root, text="Starting Y slider")
-starting_y_body = Scale(root, from_=2, to=10, orient=HORIZONTAL)
+starting_y_body = Entry(root, width = 20)
 starting_y_body_label.grid(row=2, column=0)
 starting_y_body.grid(row=2, column=1)
 
 #This is the set the starting x velocity for body using a slider
 starting_xv_body_label = Label(root, text="Starting X velocity slider")
-starting_xv_body = Scale(root, from_=2, to=10, orient=HORIZONTAL)
+starting_xv_body = Entry(root, width = 20)
 starting_xv_body_label.grid(row=3, column=0)
 starting_xv_body.grid(row=3, column=1)
 
 #This is the set the starting y velocity for the body using a slider
 starting_yv_body_label = Label(root, text="Starting Y velocity slider")
-starting_yv_body = Scale(root, from_=2, to=10, orient=HORIZONTAL)
+starting_yv_body = Entry(root, width = 20)
 starting_yv_body_label.grid(row=4, column=0)
 starting_yv_body.grid(row=4, column=1)
 
+#add speed of sim slider
+speed_of_sim_label = Label(root, text="Please select the speed of the simulation")
+Radiobutton(root, text = "normal", variable = speed_for_sim, value = "normal").grid(row=6, column=0)
+Radiobutton(root, text = "fast", variable = speed_for_sim, value = "fast").grid(row=6, column=1)
+Radiobutton(root, text = "very fast", variable = speed_for_sim, value = "vfast").grid(row=6, column=2)
+Radiobutton(root, text = "extremely fast", variable = speed_for_sim, value = "efast").grid(row=6, column=3)
+speed_of_sim_label.grid(row=5, column=0)
+
+#add slider for time step
+
+
+#Add preset buttons right here
+
+
 #This is the add button, to add the body to the list
 add_body_button = Button(root, text="Add body", command=add_body)
-add_body_button.grid(row=5, column=0)
+add_body_button.grid(row=7, column=0)
 
 #This is the display bodies button,just used for the testing for now
 display_bodies_button = Button(root, text="Display Bodies", command=show_body_values)
-display_bodies_button.grid(row=6, column=0)
+display_bodies_button.grid(row=8, column=0)
+
+#This is the run button, NOT CURRENTLY WORKING
+run_sim_button = Button(root, text="Run Simulation", command=show_body_values)
+run_sim_button.grid(row=9, column=0)
+
 
 root.mainloop()
