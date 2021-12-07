@@ -174,6 +174,10 @@ display_bodies_button.grid(row=16, column=0)
 run_sim_button = tk.Button(root, text="Run Simulation", command=run_sim)
 run_sim_button.grid(row=17, column=0)
 
+#This is the button to clear the list of bodies
+clear_bodies_button = tk.Button(root, text="Clear Bodies", command=clear_bodies)
+clear_bodies_button.grid(row=18, column=0)
+
 #This is will display each of the bodies than have been add into the list
 display_list_label = tk.Label(root, text="")
 display_list_label.grid(row=20, column=0)
