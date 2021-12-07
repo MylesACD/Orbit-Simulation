@@ -60,7 +60,7 @@ def clear_bodies():
 
 #Used to calculate the total duration of the simulation
 def cal_duration():
-    years = duration.get()
+    years = float(duration.get())
     days = years *365
 
     # duration is a length of years split into hours
@@ -97,9 +97,12 @@ def body_to_string(body):
 def add_body():
     try:
         error_label.config(text="")
-        temp = b.body(float(size_of_body.get()), float(starting_x_body.get()), float(starting_y_body.get()), float(starting_xv_body.get()), float(starting_yv_body.get()))
-        list_of_all_bodies.append(temp)
-        display_list()
+        if float(size_of_body.get()) < 1000:
+            error_label.config(text="Mass needs to be at least 1000")            
+        else:           
+            temp = b.body(float(size_of_body.get()), float(starting_x_body.get()), float(starting_y_body.get()), float(starting_xv_body.get()), float(starting_yv_body.get()))
+            list_of_all_bodies.append(temp)
+            display_list()
         
     except ValueError:
         error_label.config(text="Please make sure to only input numbers and not to leave any textboxes empty")
@@ -128,7 +131,7 @@ the value of the slider be multiplied a certain number.
 
 
 #This is the set the mass of the body using a textbox
-size_of_body_label = tk.Label(root, text="Mass of the body")
+size_of_body_label = tk.Label(root, text="Mass of the body (Must be 1000 or greater)")
 size_of_body = tk.Entry(root, width = 20)
 size_of_body_label.grid(row=0, column=0)
 size_of_body.grid(row=0, column=1)
@@ -158,16 +161,16 @@ starting_yv_body_label.grid(row=4, column=0)
 starting_yv_body.grid(row=4, column=1)
 
 #This the textbox for the duration in years
-#duration_label = tk.Label(root, text="Enter the duration of the simulation (1 = one year, 2 = two year, etc...")
-#duration = tk.Entry(root, width = 20)
-#duration_label.grid(row=5, column=0)
-#duration.grid(row=5, column=1)
-
-#We could also use a slider for the duration in years to keep the input locked in
-duration_label = tk.Label(root, text="Choose the duration of the simulation")
-duration = tk.Scale(root, from_=1, to=10, orient=tk.HORIZONTAL)
+duration_label = tk.Label(root, text="Enter the duration of the simulation (1 = one year, 2 = two year, etc...")
+duration = tk.Entry(root, width = 20)
 duration_label.grid(row=5, column=0)
 duration.grid(row=5, column=1)
+
+#We could also use a slider for the duration in years to keep the input locked in
+#duration_label = tk.Label(root, text="Choose the duration of the simulation")
+#duration = tk.Scale(root, from_=1, to=10, orient=tk.HORIZONTAL)
+#duration_label.grid(row=5, column=0)
+#duration.grid(row=5, column=1)
 
 #add speed of sim radio buttons
 speed_of_sim_label = tk.Label(root, text="Please select the speed of the simulation")
