@@ -137,25 +137,25 @@ size_of_body_label.grid(row=0, column=0)
 size_of_body.grid(row=0, column=1)
 
 #This is the set the starting x of the body using a textbox
-starting_x_body_label = tk.Label(root, text="Starting X slider")
+starting_x_body_label = tk.Label(root, text="Starting X")
 starting_x_body = tk.Entry(root, width = 20)
 starting_x_body_label.grid(row=1, column=0)
 starting_x_body.grid(row=1, column=1)
 
 #This is the set the starting y of the body using a textbox
-starting_y_body_label = tk.Label(root, text="Starting Y slider")
+starting_y_body_label = tk.Label(root, text="Starting Y")
 starting_y_body = tk.Entry(root, width = 20)
 starting_y_body_label.grid(row=2, column=0)
 starting_y_body.grid(row=2, column=1)
 
 #This is the set the starting x velocity for body using a textbox
-starting_xv_body_label = tk.Label(root, text="Starting X velocity slider")
+starting_xv_body_label = tk.Label(root, text="Starting X velocity")
 starting_xv_body = tk.Entry(root, width = 20)
 starting_xv_body_label.grid(row=3, column=0)
 starting_xv_body.grid(row=3, column=1)
 
 #This is the set the starting y velocity for the body using a textbox
-starting_yv_body_label = tk.Label(root, text="Starting Y velocity slider")
+starting_yv_body_label = tk.Label(root, text="Starting Y velocity")
 starting_yv_body = tk.Entry(root, width = 20)
 starting_yv_body_label.grid(row=4, column=0)
 starting_yv_body.grid(row=4, column=1)
