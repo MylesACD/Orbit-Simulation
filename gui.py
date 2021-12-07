@@ -84,7 +84,7 @@ def body_to_string(body):
         
 #This is using to create a body from the user inputs and place that into the list for holding
 def add_body():
-    temp = b.body(size_of_body.get(), starting_x_body.get(), starting_y_body.get(), starting_xv_body.get(), starting_yv_body.get())
+    temp = b.body(float(size_of_body.get()), float(starting_x_body.get()), float(starting_y_body.get()), float(starting_xv_body.get()), float(starting_yv_body.get()))
     list_of_all_bodies.append(temp)
     display_list()
 
