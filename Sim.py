@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 import body as b
-import timing as t
+
 
 #---------------------
 
@@ -77,7 +77,7 @@ def construct_points(bodies):
     
 def anim_orbit(bodies,dur,dt, speed):
     
-    list_of_positions, end_bodies = t.runtime(orbit_sim(bodies,dur,dt))
+    list_of_positions, end_bodies = orbit_sim(bodies,dur,dt)
     list_of_positions = np.asarray(list_of_positions)
     
     magic=  220
@@ -142,7 +142,7 @@ def adjust_dot_sizes(masses):
     mexp =np.asarray([int(num) for num in mexp])
     mcoe = np.asarray([float(num) for num in mcoe])
     # get the ratio between the exponent and the smallest body exponent
-    mexp = mexp/min(mexp)
+    mexp = mexp/(1+min(mexp))
     # put to the power of 5 to make it really matter
     mexp = mexp**5
     # mcoe is not as import as mexp, so reduce its power
