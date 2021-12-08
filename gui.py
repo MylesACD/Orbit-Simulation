@@ -31,6 +31,9 @@ XTE_J =   b.body(5.967e30,   -400e9,    -400e9,     1e3,  1e3)
 
 full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
 local_plus = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
+earth_sun = [SUN,EARTH]
+earth_sun_jupter = [SUN, EARTH, JUPITER]
+
 
 #-------------------------------------------------
 
@@ -51,7 +54,26 @@ def solar_preset_plus():
         display_list()
     else:
         error_label.config(text="Sorry, can only add any preset once per a simulation. Please clear the list if you want to add a different preset.")
-        
+
+#This is used to add earth_sun into the list of bodies
+def earth_sun_preset():
+    error_label.config(text="")
+    if len(list_of_all_bodies) == 0: 
+        list_of_all_bodies.extend(earth_sun)
+        display_list()
+    else:
+        error_label.config(text="Sorry, can only add any preset once per a simulation. Please clear the list if you want to add a different preset.")
+
+#This is used add earth_sun_jupter into the list of bodies
+def earth_sun_jupter_preset():
+    error_label.config(text="")
+    if len(list_of_all_bodies) == 0:
+        list_of_all_bodies.extend(earth_sun_jupter)
+        display_list()
+    else:
+        error_label.config(text="Sorry, can only add any preset once per a simulation. Please clear the list if you want to add a different preset.")
+
+
 #Used to clear out the list of the bodies    
 def clear_bodies():
     error_label.config(text="")
@@ -115,6 +137,9 @@ def display_list():
         temp += body_to_string(x)
         
     display_list_label.config(text=temp)
+    
+#This is used to rum the simualation by calling anum_orbit from Sim.py and inputing all of the list of bodys
+#As well as all of the simulation values from the user    
 def run_sim():
     error_label.config(text="")
     display_list()
@@ -122,12 +147,6 @@ def run_sim():
         Sim.anim_orbit(list_of_all_bodies, cal_duration(), time_step.get(), speed_for_sim.get())
     else:
         error_label.config(text = "Must add bodies before running simulation")
-
-''' Using sliders would be nice since we will have full control of what the user would put into the model
-It does also have some limitions like when it comes to selecting the correct number. I think we can have
-the value of the slider be multiplied a certain number. 
-
-'''
 
 
 #This is the set the mass of the body using a textbox
@@ -166,12 +185,6 @@ duration = tk.Entry(root, width = 20)
 duration_label.grid(row=5, column=0)
 duration.grid(row=5, column=1)
 
-#We could also use a slider for the duration in years to keep the input locked in
-#duration_label = tk.Label(root, text="Choose the duration of the simulation")
-#duration = tk.Scale(root, from_=1, to=10, orient=tk.HORIZONTAL)
-#duration_label.grid(row=5, column=0)
-#duration.grid(row=5, column=1)
-
 #add speed of sim radio buttons
 speed_of_sim_label = tk.Label(root, text="Please select the speed of the simulation")
 tk.Radiobutton(root, text = "normal", variable = speed_for_sim, value = "normal").grid(row=7, column=0)
@@ -190,10 +203,25 @@ time_step_label.grid(row=8, column=0)
 #Add preset buttons right here
 presets_here_label = tk.Label(root, text="Here are some presets")
 presets_here_label.grid(row=10, column=0)
+
+#-------------------------------------------------------------------------------------------------
+#This is the present button for our solar system
 our_solar_system = tk.Button(root, text="Our solar system preset", command=solar_preset)
 our_solar_system.grid(row=11, column=0)
+
+#This is the present button for our solar system with a black hole preset
 our_solar_system_black_hole = tk.Button(root, text="Our solar system with a black hole preset", command=solar_preset_plus)
 our_solar_system_black_hole.grid(row=11, column=1)
+
+##This is the present button for earth and sun
+earth_sun_button = tk.Button(root, text="Earth and Sun preset", command=earth_sun_preset)
+earth_sun_button.grid(row=11, column=2)
+
+##This is the present button for earth, sun, and jupter
+our_solar_system_black_hole = tk.Button(root, text="Earth, Sun, and Jupter preset", command=earth_sun_jupter_preset)
+our_solar_system_black_hole.grid(row=11, column=3)
+
+#-------------------------------------------------------------------------------------------------
 
 #This is the add button, to add the body to the list
 add_body_button = tk.Button(root, text="Add body", command=add_body)
@@ -203,7 +231,7 @@ add_body_button.grid(row=15, column=0)
 display_bodies_button = tk.Button(root, text="Display Bodies", command=display_list)
 display_bodies_button.grid(row=16, column=0)
 
-#This is the run button, NOT CURRENTLY WORKING
+#This is the run button
 run_sim_button = tk.Button(root, text="Run Simulation", command=run_sim)
 run_sim_button.grid(row=17, column=0)
 
