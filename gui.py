@@ -82,12 +82,20 @@ def clear_bodies():
 
 #Used to calculate the total duration of the simulation
 def cal_duration():
-    years = float(duration.get())
-    days = years *365
-
-    # duration is a length of years split into seconds
-    dur= days *24 *60 *60
-    return dur
+    error_label.config(text="")
+    try:
+        years = float(duration.get())
+        if years < 0:
+            error_label.config(text="Duration needs to positive")
+            return -1
+        days = years *365
+    
+        # duration is a length of years split into seconds
+        dur= days *24 *60 *60
+        return dur
+    
+    except ValueError:
+        error_label.config(text="Please make sure to only input numbers and not to leave any textboxes empty")
 
 #This function is used for testing that the text box values are being taken in correctly
 def show_body_values():
@@ -143,9 +151,10 @@ def display_list():
 def run_sim():
     error_label.config(text="")
     display_list()
-    if len(list_of_all_bodies) != 0: 
-        Sim.anim_orbit(list_of_all_bodies, cal_duration(), time_step.get(), speed_for_sim.get())
-    else:
+    sim_duration = cal_duration()
+    if len(list_of_all_bodies) != 0 and sim_duration != -1: 
+        Sim.anim_orbit(list_of_all_bodies, sim_duration, time_step.get(), speed_for_sim.get())
+    elif len(list_of_all_bodies) == 0:
         error_label.config(text = "Must add bodies before running simulation")
 
 
