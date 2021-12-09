@@ -258,5 +258,5 @@ error_space = tk.Label(root, text="        ")
 error_label.grid(row=50, column=1)
 error_space.grid(row=50, column=0)
 
-
-root.mainloop()
+if __name__ == '__main__':
+    root.mainloop()
