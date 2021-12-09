@@ -85,8 +85,8 @@ def cal_duration():
     years = float(duration.get())
     days = years *365
 
-    # duration is a length of years split into hours
-    dur= days *24
+    # duration is a length of years split into seconds
+    dur= days *24 *60 *60
     return dur
 
 #This function is used for testing that the text box values are being taken in correctly
@@ -195,9 +195,9 @@ speed_of_sim_label.grid(row=6, column=0)
 
 #This allows the user to select the time step of the simulation
 time_step_label = tk.Label(root, text = "Please select the time step")
-tk.Radiobutton(root, text = "Minute", variable = time_step, value = 60).grid(row=9, column=0)
-tk.Radiobutton(root, text = "Hour", variable = time_step, value = 60 * 60).grid(row=9, column=1)
-tk.Radiobutton(root, text = "Day", variable = time_step, value = 60 * 60 *24).grid(row=9, column=2)
+tk.Radiobutton(root, text = "Hour", variable = time_step, value = 60*60).grid(row=9, column=0)
+tk.Radiobutton(root, text = "Day", variable = time_step, value = 60 * 60 * 24).grid(row=9, column=1)
+tk.Radiobutton(root, text = "Year", variable = time_step, value = 60 * 60 *24 * 365).grid(row=9, column=2)
 time_step_label.grid(row=8, column=0)
 
 #Add preset buttons right here

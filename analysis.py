@@ -7,9 +7,9 @@ import body as b
 years = 100
 days = years *365
 
-# duration is a length of years split into hours
-dur= days *24
-#one hour
+# duration is a length of years split into seconds
+dur= days *24 *60*60
+#measured in seconds one hour
 dt = 60 *60
 
 frame_time = 0.001

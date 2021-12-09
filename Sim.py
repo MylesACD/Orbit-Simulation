@@ -9,8 +9,8 @@ import body as b
 years = 100
 days = years *365
 
-# duration is a length of years split into hours
-dur= days *24
+# duration is a length of years split into seconds
+dur= days *24 *60*60
 # measured in seconds so 60*60 is one hour
 dt = 60 *60
 
@@ -38,7 +38,7 @@ def orbit_sim(bodies,dur,dt):
     positions.append(construct_points(bodies))
     b_list=[]
     b_list.append(bodies)
-    for i in range(int(dur)):
+    for i in range(int(dur/dt)):
         #print_bodies(bodies)
         bodies = accl_all(bodies,dt)
         bodies = move_all(bodies,dt)
