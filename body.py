@@ -22,8 +22,12 @@ class body(object):
     def __str__(self):
         return str(self.mass)
         
-    
+"""    
+Takes two bodies and returns the square of th euclidean distance between them
 
+Parameters:
+    b1,b2: body objects to find the distance between
+"""
 def calc_square_distance(b1,b2):
     return ((b1.x - b2.x)**2 + (b1.y-b2.y)**2)
 
@@ -31,6 +35,16 @@ def print_bodies(bodies):
     for body in bodies:
         print(body)
         
+"""
+Calculate the accleation of a body due to gravitational forces from other bodies, and update the body's velocity
+
+Parameters:
+    body: the body object to have velocity updated
+    dodies: list of all bodies in the system
+    dt: the timestep in seconds of the simulation
+    
+Returns: a body object with updated velocity
+"""      
 def calc_velo(body,bodies,dt):
     if body.mass<1:
         return body
@@ -68,12 +82,30 @@ def calc_velo(body,bodies,dt):
         
             
     return body
+"""
+Changes a body's x and y position by the timestep times their velocity
 
+Parameters:
+    body: the body to move
+    dt: the timestep for the simulation
+    
+Returns:
+    body: the body with its new x and y position
+"""
 def move(body,dt):
         body.x += body.x_velo *dt
         body.y += body.y_velo *dt
         return body
     
+"""
+Calculates the x and y coordinates of a systems center of mass
+
+Parameter:
+    bodies: list of bodies object that makes up the system
+    
+Returns
+    x,y (float): coordinates for the center of mass 
+""" 
 def center_of_mass(bodies):
    xcom=0
    ycom=0
