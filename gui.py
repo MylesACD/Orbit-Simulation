@@ -127,8 +127,8 @@ def body_to_string(body):
 def add_body():
     try:
         error_label.config(text="")
-        if float(size_of_body.get()) < 1000:
-            error_label.config(text="Mass needs to be at least 1000")            
+        if float(size_of_body.get()) < 1:
+            error_label.config(text="Mass needs to be at least 1")            
         else:           
             temp = b.body(float(size_of_body.get()), float(starting_x_body.get()), float(starting_y_body.get()), float(starting_xv_body.get()), float(starting_yv_body.get()))
             list_of_all_bodies.append(temp)
@@ -159,7 +159,7 @@ def run_sim():
 
 
 #This is the set the mass of the body using a textbox
-size_of_body_label = tk.Label(root, text="Mass of the body (Must be 1000 or greater)")
+size_of_body_label = tk.Label(root, text="Mass of the body (Must be 1 or greater)")
 size_of_body = tk.Entry(root, width = 20)
 size_of_body_label.grid(row=4, column=0)
 size_of_body.grid(row=4, column=1)
