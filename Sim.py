@@ -153,8 +153,8 @@ def adjust_dot_sizes(masses):
     mcoe = np.asarray([float(num) for num in mcoe])
     # get the ratio between the exponent and the smallest body exponent
     mexp = mexp/(1+min(mexp))
-    # put to the power of 5 to make it really matter
-    mexp = mexp**6
+    # increase its weight
+    mexp = mexp*3
     # mcoe is not as import as mexp, so reduce its power
     mcoe = (mcoe)**0.5
     # combine mcoe and mexp to form the sizes of the dots
