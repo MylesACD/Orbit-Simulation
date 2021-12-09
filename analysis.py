@@ -46,6 +46,7 @@ def distance_e_s(years):
         #percentage distance
         distances.append(b.calc_square_distance(bodies[0],bodies[3])**0.5 / measured_avg)
     xvals = np.asarray(range(len(distances)))/len(distances) * years
+    print(max(distances)-100)
     plt.plot(xvals,distances,"green")
 
     #distance for day timestep
@@ -56,6 +57,7 @@ def distance_e_s(years):
         distances.append(b.calc_square_distance(bodies[0],bodies[3])**0.5/ measured_avg)
     distances = np.repeat(distances,24)
     xvals = np.asarray(range(len(distances)))/len(distances)* years
+    print(max(distances)-100)
     plt.plot(xvals,distances, "red")
     
      #distance for year timestep
@@ -66,6 +68,7 @@ def distance_e_s(years):
         distances.append(b.calc_square_distance(bodies[0],bodies[3])**0.5/ measured_avg)
     distances = np.repeat(distances,365)
     xvals = np.asarray(range(len(distances)))/len(distances)*years
+    print(max(distances)-100)
     plt.plot(xvals,distances, "black")
     
 # show the velocity graph of the center of mass
@@ -92,7 +95,7 @@ def system_bary_center(bodies,dur,dt):
 def sun_barycenter_distance(bodies,dur):
      plt.title("Distance From Sun to Barycenter")
      plt.xlabel("Years")
-     plt.ylabel("Percentage of Measured")
+     plt.ylabel("Percentage of Measured Distance")
      measured = 449e3/100
      
      list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,hour)
@@ -148,6 +151,6 @@ def earth_velocity(dur,dt):
     plt.plot(xvals,yvelos)
     
 distance_e_s(10)
-system_bary_center(Sim.S_E,dur*10,hour)
-sun_barycenter_distance(Sim.S_E,dur)
+#system_bary_center(Sim.S_E,dur*10,hour)
+#sun_barycenter_distance(Sim.S_E,dur)
 #earth_velocity(dur,hour)
