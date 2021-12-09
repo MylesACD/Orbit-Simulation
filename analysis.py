@@ -15,8 +15,6 @@ hour = 3600
 day = 24*hour
 
 year = 365*hour
-
-frame_time = 0.001
 #---------------------
 
 
@@ -140,7 +138,7 @@ def earth_velocity(dur,dt):
     plt.plot(xvals,xvelos)
     plt.plot(xvals,yvelos)
     
-#distance_e_s(10)
+distance_e_s(10)
 system_bary_center(Sim.S_E,dur*10,hour)
-#sun_barycenter_distance(Sim.S_E,dur)
+sun_barycenter_distance(Sim.S_E,dur)
 #earth_velocity(dur,hour)
