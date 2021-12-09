@@ -169,6 +169,7 @@ def adjust_dot_sizes(masses):
 full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
 local_plus = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
 collision = [SUN,COLLISION]
+S_E = [SUN,EARTH]
 
 #anim_orbit(full_local,dur,dt, "vfast")
 
