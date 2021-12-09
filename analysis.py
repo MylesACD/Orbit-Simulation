@@ -20,42 +20,45 @@ frame_time = 0.001
 #---------------------
 
 
-def distance_e_s():
-    #divide by 100 to get year 
-    measured_avg = 149.6e9
+def distance_e_s(years):
+    #divide by 100 to get a percentage
+    measured_avg = 149.6e9/100
     
-    
+     
     bodies = Sim.full_local
     
     plt.xlabel("Year")
     plt.ylabel("Perecnt of Real Average Distance")
-    plt.title("Distance Between Earth and Sun Over 100 Years")
+    title = "Distance Between Earth and Sun Over " +str(years)+ " Years" 
+    plt.title(title)
   
     #distance for hour timestep
     distances = []
     list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,hour)
     for bodies in b_list:
+        #percentage distance
         distances.append(b.calc_square_distance(bodies[0],bodies[3])**0.5 / measured_avg)
-    xvals = np.asarray(range(len(distances)))/len(distances) *100
-    print(distances[0])
+    xvals = np.asarray(range(len(distances)))/len(distances) * years
     plt.plot(xvals,distances,"green")
 
     #distance for day timestep
     list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,day)
     distances = []
     for bodies in b_list:
+        #percentage distance
         distances.append(b.calc_square_distance(bodies[0],bodies[3])**0.5/ measured_avg)
     distances = np.repeat(distances,24)
-    xvals = np.asarray(range(len(distances)))/len(distances)*100
+    xvals = np.asarray(range(len(distances)))/len(distances)* years
     plt.plot(xvals,distances, "red")
     
      #distance for year timestep
     list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,year)
     distances = []
     for bodies in b_list:
+        #percentage distance
         distances.append(b.calc_square_distance(bodies[0],bodies[3])**0.5/ measured_avg)
     distances = np.repeat(distances,365)
-    xvals = np.asarray(range(len(distances)))/len(distances)*100
+    xvals = np.asarray(range(len(distances)))/len(distances)*years
     plt.plot(xvals,distances, "black")
     
 # show the path of the center of mass of the system over time
@@ -72,9 +75,9 @@ def system_bary_center(bodies,dur,dt):
         yvals.append(y)
         i+=1000
     plt.title("Center of Mass Path")
-    plt.plot(xvals,yvals,"o")
+    plt.plot(xvals,yvals)
 
-def sun_barycenter_distance(bodies):
+def sun_barycenter_distance(bodies,dur,dt):
      list_of_positions, b_list  = Sim.orbit_sim(bodies,50*365*24*60*60,hour)
      distances = []
      for bodies in b_list:
@@ -84,14 +87,29 @@ def sun_barycenter_distance(bodies):
          distance = ((x-sun.x)**2 + (y-sun.y)**2)**0.5
          distances.append(distance)
      xvals = np.asarray(range(len(distances)))/len(distances)*50
-     plt.title("Distance From Sun to Barycenter Over 50 Years")
+     plt.title("Distance From Sun to Barycenter")
      plt.xlabel("Years")
      plt.ylabel("Distance (meters)")
      plt.plot(xvals,distances)
-     
-def earth_velocity():
-    pass
+# plot earth's x and y velocity over a number of years     
+def earth_velocity(bodies,dur,dt):
+    list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,dt)
+    xvelos=[]
+    yvelos=[]
+   
+    for bodies in b_list:
+        xvelos.append(bodies[3].x_velo)
+        yvelos.append(bodies[3].y_velo)
+    #put the x axis in years
+    xvals = np.asarray(range(len(xvelos)))/len(yvelos)*(dur/365/24/60/60)
+    plt.title("X and Y Velocities of Earth")
+    plt.xlabel("Years")
+    plt.ylabel("Velocity (meters/second)")
+    plt.plot(xvals,xvelos)
+    plt.plot(xvals,yvelos)
     
-distance_e_s()
-#system_bary_center([Sim.SUN,Sim.EARTH],dur,day)
-#sun_barycenter_distance(Sim.S_E)
+    
+#distance_e_s(50)
+#system_bary_center(Sim.full_local,dur,hour)
+sun_barycenter_distance(Sim.S_E,dur,hour)
+#earth_velocity(Sim.full_local)

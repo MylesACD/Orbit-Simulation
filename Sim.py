@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import numpy as np
 import body as b
-
+import copy 
 
 #---------------------
 
@@ -47,7 +47,7 @@ def orbit_sim(bodies,dur,dt):
         bodies = accl_all(bodies,dt)
         bodies = move_all(bodies,dt)
         positions.append(construct_points(bodies)) 
-        b_list.append(bodies)
+        b_list.append(copy.deepcopy(bodies))
     return positions, b_list
 
 def accl_all(bodies,dt):
@@ -138,7 +138,6 @@ def anim_orbit(bodies,dur,dt, speed):
         ax.axis("off")
         ax.draw(fig.canvas.renderer)
         plt.pause(frame_time) 
-        plt.get_current_fig_manager().window.showMaximized() 
         i+=plot_interval    
         
     
@@ -155,7 +154,7 @@ def adjust_dot_sizes(masses):
     # get the ratio between the exponent and the smallest body exponent
     mexp = mexp/(1+min(mexp))
     # put to the power of 5 to make it really matter
-    mexp = mexp**5
+    mexp = mexp**6
     # mcoe is not as import as mexp, so reduce its power
     mcoe = (mcoe)**0.5
     # combine mcoe and mexp to form the sizes of the dots
