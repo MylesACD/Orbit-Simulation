@@ -77,8 +77,12 @@ def system_bary_center(bodies,dur,dt):
     plt.title("Center of Mass Path")
     plt.plot(xvals,yvals)
 
-def sun_barycenter_distance(bodies,dur,dt):
-     list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,dt)
+def sun_barycenter_distance(bodies,dur):
+     plt.title("Distance From Sun to Barycenter")
+     plt.xlabel("Years")
+     plt.ylabel("Distance (meters)")
+     
+     list_of_positions, b_list  = Sim.orbit_sim(bodies,dur,hour)
      distances = []
      for bodies in b_list:
          sun = bodies[0]
@@ -87,10 +91,9 @@ def sun_barycenter_distance(bodies,dur,dt):
          distance = ((x-sun.x)**2 + (y-sun.y)**2)**0.5
          distances.append(distance)
      xvals = np.asarray(range(len(distances)))/len(distances)*(dur/365/24/60/60)
-     plt.title("Distance From Sun to Barycenter")
-     plt.xlabel("Years")
-     plt.ylabel("Distance (meters)")
      plt.plot(xvals,distances)
+    
+    
 # plot earth's x and y velocity over a number of years     
 def earth_velocity(dur,dt):
     bodies = Sim.full_local
@@ -109,8 +112,11 @@ def earth_velocity(dur,dt):
     plt.plot(xvals,xvelos)
     plt.plot(xvals,yvelos)
     
-    
+#not_used, b_list_h  = Sim.orbit_sim(Sim.full_local,dur,hour)   
+#not_used, b_list_d  = Sim.orbit_sim(Sim.full_local,dur,day)  
+#not_used, b_list_y  = Sim.orbit_sim(Sim.full_local,dur,year)   
+
 #distance_e_s(50)
 #system_bary_center(Sim.full_local,dur,hour)
-sun_barycenter_distance(Sim.S_E,dur,hour)
+sun_barycenter_distance(Sim.S_E,dur)
 #earth_velocity(dur,hour)

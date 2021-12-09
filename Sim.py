@@ -6,7 +6,7 @@ import copy
 
 #---------------------
 
-years = 100
+years = 1
 days = years *365
 
 # duration is a length of years split into seconds
@@ -151,14 +151,16 @@ def adjust_dot_sizes(masses):
     # convert strings to ints
     mexp =np.asarray([int(num) for num in mexp])
     mcoe = np.asarray([float(num) for num in mcoe])
-    # get the ratio between the exponent and the smallest body exponent
-    mexp = mexp/(1+min(mexp))
+    # get the ratio between the exponent and the largest body exponent
+    mexp =(1+mexp)/(max(mexp))
     # increase its weight
-    mexp = mexp*3
+    mexp = mexp**5
+    mexp*=2.7
+    print(mexp)
     # mcoe is not as import as mexp, so reduce its power
-    mcoe = (mcoe)**0.5
+    mcoe = (mcoe)**0.4
     # combine mcoe and mexp to form the sizes of the dots
-    sizes = [20*2**num for num in mexp] * mcoe
+    sizes = [20*2**num for num in mexp] 
     
     
     
