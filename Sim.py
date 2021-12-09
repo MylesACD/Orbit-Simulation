@@ -13,9 +13,13 @@ days = years *365
 dur= days *24 *60*60
 # measured in seconds so 60*60 is one hour
 dt = 60 *60
+hour = 3600
 
+day = 24*hour
 
-frame_time = 0.001
+year = 365*hour
+
+frame_time = 0.01
 
 #---------------------
 SUN =     b.body(1.9885e+30,   0,         0,          0,          0)
@@ -169,5 +173,5 @@ collision = [SUN,COLLISION]
 #anim_orbit(full_local,dur,dt, "vfast")
 
 #anim_orbit(collision, dur, dt, "efast")
-#anim_orbit([SUN,EARTH],dur,dt,"vfast")
+#anim_orbit([SUN,EARTH],dur,year,"normal")
 

@@ -47,7 +47,7 @@ def calc_velo(body,bodies,dt):
             if (r2**0.5) < DISTANCE_TOL:
 
                 print(body.mass," collided with: ", other.mass)
-                #return zero()
+                return body
             
             if r2!=0:
             
@@ -76,5 +76,16 @@ def move(body,dt):
         body.y += body.y_velo *dt
         return body
     
-def zero():
-    return body(0,0,0,0,0)
+def center_of_mass(bodies):
+   xcom=0
+   ycom=0
+   for body in bodies:
+       tmass = sum([body.mass for body in bodies])
+       xcom+=body.x*body.mass/tmass
+       ycom+=body.y*body.mass/tmass
+    
+   return xcom, ycom
+    
+    
+    
+    
