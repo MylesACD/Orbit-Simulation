@@ -6,12 +6,12 @@ import body as b
 
 #---------------------
 
-years = 10
+years = 100
 days = years *365
 
 # duration is a length of years split into hours
 dur= days *24
-#one hour
+# measured in seconds so 60*60 is one hour
 dt = 60 *60
 
 
@@ -37,6 +37,7 @@ def orbit_sim(bodies,dur,dt):
     positions = []
     positions.append(construct_points(bodies))
     b_list=[]
+    b_list.append(bodies)
     for i in range(int(dur)):
         #print_bodies(bodies)
         bodies = accl_all(bodies,dt)
@@ -82,6 +83,7 @@ def anim_orbit(bodies,dur,dt, speed):
     
     list_of_positions, b_list = orbit_sim(bodies,dur,dt)
     list_of_positions = np.asarray(list_of_positions)
+    
     
     magic=  220
     if speed =="normal":
@@ -164,8 +166,8 @@ full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
 local_plus = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
 collision = [SUN,COLLISION]
 
-anim_orbit(full_local,dur,dt, "vfast")
-    
+#anim_orbit(full_local,dur,dt, "vfast")
+
 #anim_orbit(collision, dur, dt, "efast")
-     
+#anim_orbit([SUN,EARTH],dur,dt,"vfast")
 
