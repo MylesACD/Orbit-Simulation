@@ -6,22 +6,22 @@ import body as b
 
 #---------------------
 
-years = 5
+years = 100
 days = years *365
 
 # duration is a length of years split into hours
 dur= days *24
-#one hour
+# measured in seconds so 60*60 is one hour
 dt = 60 *60
 
 
 frame_time = 0.001
 
 #---------------------
-SUN =     b.body(1.989e+30,   0,         0,          0,          0)
+SUN =     b.body(1.9885e+30,   0,         0,          0,          0)
 MERCURY = b.body(0.33011e24,  57.909e9,  0,          0,          47.36e3)
 VENUS = b.body(4.8675e24,    -108.209e9, 0,          0,          35.02e3)
-EARTH =   b.body(5.97219e+24, 0,         148e9,      3e4,        0)
+EARTH =   b.body(5.9724e+24, 0,         149.596e9,      2.978e4,        0)
 MARS = b.body(0.64171e24,     161.166e9, 161.166e9,  17.02e3,    -17.02e3)
 JUPITER = b.body(1898.13e24,  0,        -778.57e9,  -13.06e3,    0)
 SATURN = b.body(568.34e24,    1013.66e9, -1013.66e9,-6.845e3,   -6.845e3)
@@ -30,17 +30,21 @@ NEPTUNE = b.body(102.413e24,  -3178.49e9, 3178.49e9,  3.839e3,    3.839e3)
 
 XTE_J =   b.body(5.967e30,   -400e9,    -400e9,     1e3,  1e3)
 
+COLLISION = b.body(2e24 , 120e9,0,0,0)
+
 #return a 3d array should be shape dur,2,len(bodies)
 def orbit_sim(bodies,dur,dt):
     positions = []
     positions.append(construct_points(bodies))
-    
+    b_list=[]
+    b_list.append(bodies)
     for i in range(int(dur)):
         #print_bodies(bodies)
         bodies = accl_all(bodies,dt)
         bodies = move_all(bodies,dt)
         positions.append(construct_points(bodies)) 
-    return positions, bodies
+        b_list.append(bodies)
+    return positions, b_list
 
 def accl_all(bodies,dt):
     new_bodies = []
@@ -77,8 +81,9 @@ def construct_points(bodies):
     
 def anim_orbit(bodies,dur,dt, speed):
     
-    list_of_positions, end_bodies = orbit_sim(bodies,dur,dt)
+    list_of_positions, b_list = orbit_sim(bodies,dur,dt)
     list_of_positions = np.asarray(list_of_positions)
+    
     
     magic=  220
     if speed =="normal":
@@ -108,8 +113,7 @@ def anim_orbit(bodies,dur,dt, speed):
     fig.canvas.draw()
     ax.plot([],[],"o")
     plt.pause(frame_time) 
-    masses = [body.mass for body in bodies]
-    dots = adjust_dot_sizes(masses)
+   
     
     
     #-----------------------
@@ -118,6 +122,9 @@ def anim_orbit(bodies,dur,dt, speed):
     i=0
     while i < list_of_positions.shape[0]:
         
+        bodies = b_list[i]
+        masses = [body.mass for body in bodies]
+        dots = adjust_dot_sizes(masses)
         space = list_of_positions[i]
         ax.clear()
         ax.set(xlim=([xmin,xmax]),ylim=[ymin,ymax])
@@ -157,9 +164,10 @@ def adjust_dot_sizes(masses):
 
 full_local = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE]
 local_plus = [SUN,MERCURY,VENUS,EARTH,MARS,JUPITER,SATURN,URANUS,NEPTUNE,XTE_J]
+collision = [SUN,COLLISION]
 
-#anim_orbit(full_local,dur,dt, "fast")
-    
-   
-     
+#anim_orbit(full_local,dur,dt, "vfast")
+
+#anim_orbit(collision, dur, dt, "efast")
+#anim_orbit([SUN,EARTH],dur,dt,"vfast")
 

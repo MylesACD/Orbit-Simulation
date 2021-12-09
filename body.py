@@ -32,32 +32,35 @@ def print_bodies(bodies):
         print(body)
         
 def calc_velo(body,bodies,dt):
+    if body.mass<1:
+        return body
+    
 
     for other in bodies:
         
         # do not process the relationship between a body and its self
-        if body != other:            
+        if body != other and other.mass>0:            
             r2 = calc_square_distance(body,other)
             
-            #TODO revisse collision logic for radius
             # zero the body
             #calculate momentum shift
             if (r2**0.5) < DISTANCE_TOL:
 
                 print(body.mass," collided with: ", other.mass)
-                return body
-        
+                #return zero()
             
             if r2!=0:
             
                 #magnitude of the accleration 
                 accl = G * other.mass /r2 * dt
-            
+                # the x distance
                 dx =other.x - body.x
+                # the y distance
                 dy = other.y - body.y
+                # the euclidean distance
                 d = r2**0.5
             
-         
+                # the x and y component of acceleration using soh-cah
                 x_component = dx/d*accl
                 y_component = dy/d*accl
                 
@@ -67,8 +70,11 @@ def calc_velo(body,bodies,dt):
         
             
     return body
-    
+
 def move(body,dt):
         body.x += body.x_velo *dt
         body.y += body.y_velo *dt
         return body
+    
+def zero():
+    return body(0,0,0,0,0)
