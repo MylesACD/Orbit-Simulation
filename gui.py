@@ -85,7 +85,7 @@ def cal_duration():
     error_label.config(text="")
     try:
         years = float(duration.get())
-        if years < 0:
+        if years <= 0:
             error_label.config(text="Duration needs to positive")
             return -1
         days = years *365
@@ -161,92 +161,92 @@ def run_sim():
 #This is the set the mass of the body using a textbox
 size_of_body_label = tk.Label(root, text="Mass of the body (Must be 1000 or greater)")
 size_of_body = tk.Entry(root, width = 20)
-size_of_body_label.grid(row=0, column=0)
-size_of_body.grid(row=0, column=1)
+size_of_body_label.grid(row=4, column=0)
+size_of_body.grid(row=4, column=1)
 
 #This is the set the starting x of the body using a textbox
 starting_x_body_label = tk.Label(root, text="Starting X")
 starting_x_body = tk.Entry(root, width = 20)
-starting_x_body_label.grid(row=1, column=0)
-starting_x_body.grid(row=1, column=1)
+starting_x_body_label.grid(row=5, column=0)
+starting_x_body.grid(row=5, column=1)
 
 #This is the set the starting y of the body using a textbox
 starting_y_body_label = tk.Label(root, text="Starting Y")
 starting_y_body = tk.Entry(root, width = 20)
-starting_y_body_label.grid(row=2, column=0)
-starting_y_body.grid(row=2, column=1)
+starting_y_body_label.grid(row=6, column=0)
+starting_y_body.grid(row=6, column=1)
 
 #This is the set the starting x velocity for body using a textbox
 starting_xv_body_label = tk.Label(root, text="Starting X velocity")
 starting_xv_body = tk.Entry(root, width = 20)
-starting_xv_body_label.grid(row=3, column=0)
-starting_xv_body.grid(row=3, column=1)
+starting_xv_body_label.grid(row=7, column=0)
+starting_xv_body.grid(row=7, column=1)
 
 #This is the set the starting y velocity for the body using a textbox
 starting_yv_body_label = tk.Label(root, text="Starting Y velocity")
 starting_yv_body = tk.Entry(root, width = 20)
-starting_yv_body_label.grid(row=4, column=0)
-starting_yv_body.grid(row=4, column=1)
+starting_yv_body_label.grid(row=8, column=0)
+starting_yv_body.grid(row=8, column=1)
 
 #This the textbox for the duration in years
 duration_label = tk.Label(root, text="Enter the duration of the simulation (1 = one year, 2 = two year, etc...")
 duration = tk.Entry(root, width = 20)
-duration_label.grid(row=5, column=0)
-duration.grid(row=5, column=1)
+duration_label.grid(row=9, column=0)
+duration.grid(row=9, column=1)
 
 #add speed of sim radio buttons
 speed_of_sim_label = tk.Label(root, text="Please select the speed of the simulation")
-tk.Radiobutton(root, text = "normal", variable = speed_for_sim, value = "normal").grid(row=7, column=0)
-tk.Radiobutton(root, text = "fast", variable = speed_for_sim, value = "fast").grid(row=7, column=1)
-tk.Radiobutton(root, text = "very fast", variable = speed_for_sim, value = "vfast").grid(row=7, column=2)
-tk.Radiobutton(root, text = "extremely fast", variable = speed_for_sim, value = "efast").grid(row=7, column=3)
-speed_of_sim_label.grid(row=6, column=0)
+tk.Radiobutton(root, text = "normal", variable = speed_for_sim, value = "normal").grid(row=11, column=0)
+tk.Radiobutton(root, text = "fast", variable = speed_for_sim, value = "fast").grid(row=11, column=1)
+tk.Radiobutton(root, text = "very fast", variable = speed_for_sim, value = "vfast").grid(row=11, column=2)
+tk.Radiobutton(root, text = "extremely fast", variable = speed_for_sim, value = "efast").grid(row=11, column=3)
+speed_of_sim_label.grid(row=10, column=0)
 
 #This allows the user to select the time step of the simulation
 time_step_label = tk.Label(root, text = "Please select the time step")
-tk.Radiobutton(root, text = "Hour", variable = time_step, value = 60*60).grid(row=9, column=0)
-tk.Radiobutton(root, text = "Day", variable = time_step, value = 60 * 60 * 24).grid(row=9, column=1)
-tk.Radiobutton(root, text = "Year", variable = time_step, value = 60 * 60 *24 * 365).grid(row=9, column=2)
-time_step_label.grid(row=8, column=0)
+tk.Radiobutton(root, text = "Hour", variable = time_step, value = 60*60).grid(row=13, column=0)
+tk.Radiobutton(root, text = "Day", variable = time_step, value = 60 * 60 * 24).grid(row=13, column=1)
+tk.Radiobutton(root, text = "Year", variable = time_step, value = 60 * 60 *24 * 365).grid(row=13, column=2)
+time_step_label.grid(row=12, column=0)
 
 #Add preset buttons right here
 presets_here_label = tk.Label(root, text="Here are some presets")
-presets_here_label.grid(row=10, column=0)
+presets_here_label.grid(row=14, column=0)
 
 #-------------------------------------------------------------------------------------------------
 #This is the present button for our solar system
 our_solar_system = tk.Button(root, text="Our solar system preset", command=solar_preset)
-our_solar_system.grid(row=11, column=0)
+our_solar_system.grid(row=15, column=0)
 
 #This is the present button for our solar system with a black hole preset
 our_solar_system_black_hole = tk.Button(root, text="Our solar system with a black hole preset", command=solar_preset_plus)
-our_solar_system_black_hole.grid(row=11, column=1)
+our_solar_system_black_hole.grid(row=15, column=1)
 
 ##This is the present button for earth and sun
 earth_sun_button = tk.Button(root, text="Earth and Sun preset", command=earth_sun_preset)
-earth_sun_button.grid(row=11, column=2)
+earth_sun_button.grid(row=15, column=2)
 
 ##This is the present button for earth, sun, and jupter
 our_solar_system_black_hole = tk.Button(root, text="Earth, Sun, and Jupter preset", command=earth_sun_jupter_preset)
-our_solar_system_black_hole.grid(row=11, column=3)
+our_solar_system_black_hole.grid(row=15, column=3)
 
 #-------------------------------------------------------------------------------------------------
 
 #This is the add button, to add the body to the list
 add_body_button = tk.Button(root, text="Add body", command=add_body)
-add_body_button.grid(row=15, column=0)
+add_body_button.grid(row=16, column=0)
 
 #This is the display bodies button,just used for the testing for now
 display_bodies_button = tk.Button(root, text="Display Bodies", command=display_list)
-display_bodies_button.grid(row=16, column=0)
+display_bodies_button.grid(row=17, column=0)
 
 #This is the run button
 run_sim_button = tk.Button(root, text="Run Simulation", command=run_sim)
-run_sim_button.grid(row=17, column=0)
+run_sim_button.grid(row=18, column=0)
 
 #This is the button to clear the list of bodies
 clear_bodies_button = tk.Button(root, text="Clear Bodies", command=clear_bodies)
-clear_bodies_button.grid(row=18, column=0)
+clear_bodies_button.grid(row=19, column=0)
 
 #This is will display each of the bodies than have been add into the list
 display_list_label = tk.Label(root, text="")
@@ -255,8 +255,8 @@ display_list_label.grid(row=20, column=0)
 #This will be used to show any errors to the user
 error_label = tk.Label(root, text="")
 error_space = tk.Label(root, text="        ")
-error_label.grid(row=50, column=1)
-error_space.grid(row=50, column=0)
+error_label.grid(row=1, column=1)
+error_space.grid(row=1, column=0)
 
 if __name__ == '__main__':
     root.mainloop()
