@@ -5,6 +5,18 @@ import body as b
 import copy 
 
 #---------------------
+'''Create the simulation
+
+
+orbit_sim(bodies,dur,dt) - return a 3d array should be shape dur,2,len(bodies)
+def accl_all(bodies,dt) - changes the velocity of all bodies
+def move_all(bodies,dt) - moving all of the bodies
+def construct_points(bodies) - returns a 2d array should be shape 2,len(bodies)
+def anim_orbit(bodies,dur,dt, speed) - creates the animation
+def adjust_dot_sizes(masses) - creates the dots
+
+
+'''
 
 years = 1
 days = years *365

@@ -2,6 +2,15 @@ import Sim
 import matplotlib.pyplot as plt
 import numpy as np
 import body as b
+
+'''
+
+def distance_e_s(years)
+def system_bary_center(bodies,dur,dt)
+def sun_barycenter_distance(bodies,dur)
+def earth_velocity(dur,dt)
+
+'''
 #---------------------
 
 years = 10

@@ -2,6 +2,22 @@ import tkinter as tk
 import body as b
 import Sim
 
+''' Creates the GUI
+
+def solar_preset() - used to add our solar system into the list of bodies
+def solar_preset_plus() - used add our solar system with a black hole into the list of bodies
+def earth_sun_preset() - add earth and sun into the list of bodies
+def earth_sun_jupter_preset() - add earth, sun, and jupter into the list of bodies
+def clear_bodies() - clear out the list of the bodies
+def cal_duration() - calculate the total duration of the simulation given the values that the user enters
+def show_body_values() - used for testing that the text box values are being taken in correctly
+def body_to_string(body) = used to turn the body into a string that will be used to display the information about the body to the user
+def add_body() - create a body from the user inputs and place that into the list for holding
+def display_list() - used to display to the user all of the bodies that have been added into the simulation
+def run_sim() - to run the simualation by calling anum_orbit from Sim.py and inputing all of the list of bodys
+
+'''
+
 root = tk.Tk()
 root.title("Orbit Simulation")
 
@@ -146,7 +162,7 @@ def display_list():
         
     display_list_label.config(text=temp)
     
-#This is used to rum the simualation by calling anum_orbit from Sim.py and inputing all of the list of bodys
+#This is used to run the simualation by calling anum_orbit from Sim.py and inputing all of the list of bodys
 #As well as all of the simulation values from the user    
 def run_sim():
     error_label.config(text="")
